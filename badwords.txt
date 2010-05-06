@@ -12,6 +12,12 @@ Cunt : Love Triangle
 Cocksucker : Lollipop
 Motherfucker : Motherlover
 Tits : Tatertots
+Milf : Milk
+anal : happy
+boob : fun bag
+8008 : fun bag
+p[o0]rn : educational material : regex
+pr[0o]n : educational material : regex
 
 
 #PR Not-Approved
@@ -21,10 +27,14 @@ Vagina : Rabbit Hole
 Sex : Gender
 CSC : That Other Group
 Your Mom : a nice, old lady
+Rape : sing musical
+Rapist : musician
 
 #Other things to block
 
-[9SDBE83]*[=\-+#]+([DB>]|\|\))[~\-]*|[~\-]*[<C][\|]*[=\-+#]+[CDBES96]* : :) : regex
+[9SDBE83]*[\:=\-+#\[\]]+([PDB>]|[\|]{0,1}(\)|D))[~\-]*|[~\-]*[<C][\|]*[\:=\-+#\[\]]+[CDBES96]* : :) : regex
+\(\.\)\(\.\) : :) : regex
+\(\.Y\.\) : :) : regex
 
 # OH SHIT!
 

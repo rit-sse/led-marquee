@@ -11,6 +11,12 @@ marquee = MarqueeWriter("COM3", 115200)
         #"/dev/ttyUSB0"         on linux
 
 class WebServer(BaseHTTPRequestHandler):
+
+    previous_host = ""
+    previous_host_spam = 0
+
+    def __init__(self, one, two, three):
+        BaseHTTPRequestHandler.__init__(self, one, two, three)
     
     def do_GET(self):
         try:
@@ -32,6 +38,24 @@ class WebServer(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
         length= int(self.headers['content-length'])
+
+        #remote_host = self.headers['host']
+        remote_host = self.client_address[0]
+        print '> Host is: ' + str(remote_host)
+
+        if remote_host == WebServer.previous_host:
+            print '> Host is same as before'
+            WebServer.previous_host_spam += 1
+            print '> spam count is: ' + str(WebServer.previous_host_spam)
+        else:
+            print '> Host is new'
+            WebServer.previous_host_spam = 0
+            WebServer.previous_host = remote_host
+
+        if WebServer.previous_host_spam >= 5:
+           print '> Spam (Ignoring)'
+           return
+        
         txt = self.rfile.read(length)
         
         message = ""

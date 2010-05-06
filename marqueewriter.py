@@ -52,7 +52,20 @@ class MarqueeWriter(threading.Thread):
 			if message == None:
 				continue
 
+			# if message is spam -- i.e. HUGE, ignore it
+			if ( len(message) > 140 ):
+                                print 'message too long'
+                                continue
+
 			message = self.prof.replaceProfanity(message).upper()
+			
+			length = 0
+			if ( len(message) < 140 ):
+                                length = len(message)
+                        else:
+                                length = 140
+                                
+			message = message[0:length]
 
 			message = message + "   "
 

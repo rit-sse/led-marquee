@@ -3,6 +3,7 @@ import select
 import serial
 import time
 import threading
+from profanityfilter import *
 
 class MarqueeWriter(threading.Thread):
 
@@ -13,6 +14,7 @@ class MarqueeWriter(threading.Thread):
 		self.scrollMode = True
 		self.lastTime = ''
 		self.killNow = False
+		self.prof = ProfanityFilter()
 
 		threading.Thread.__init__(self)
 
@@ -49,6 +51,8 @@ class MarqueeWriter(threading.Thread):
 			# if the data is invalid, move to the next message
 			if message == None:
 				continue
+
+			message = self.prof.replaceProfanity(message).upper()
 
 			message = message + "   "
 

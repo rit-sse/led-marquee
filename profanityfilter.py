@@ -55,9 +55,10 @@ class ProfanityFilter:
             replacement = profanity[1]
             p = re.compile(badword , re.I)
             query = p.sub(replacement, query)
+        print 'Sending: ' + query
         return query
     
 
-if __name__ == '__main__':
-    pro = ProfanityFilter()
-    print(pro.replaceProfanity('I fucked your mom'))
+#if __name__ == '__main__':
+#    pro = ProfanityFilter()
+#    print(pro.replaceProfanity('I fucked your mom'))

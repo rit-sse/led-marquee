@@ -1,0 +1,10 @@
+{% extends "marquee_common.html" %}
+
+{% block body %}
+<form method="POST" action="/login">
+	<input type="hidden" name="next" value="/marquee"/>
+	<table>
+		{{ form.as_table }}
+	</table>
+</form>
+{% endblock %}

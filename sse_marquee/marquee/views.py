@@ -1,51 +1,63 @@
 from django.shortcuts import render_to_response
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from sse_marquee.marquee.models import MarqueeEntry, MarqueeForm, LoginForm
 
-def login(request):
+def login_handler(request):
+    resp_dict = {'user': request.user}
     if request.method == 'POST':
+        print 'POST'
         form = LoginForm(request.POST)
+        resp_dict['form'] = form
         user = None
         if form.is_valid():
-            user = authenticate(username=form.username, password=form.password)
+            print 'valid'
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
         else:
-            return render_to_response('login.html', \
-                   {'errors': ['your account has been disabled'], \
-                    'form': form})
+            print 'invalid form'
+            resp_dict['errors'] = ['invalid form data']
+            return render_to_response('login.html', resp_dict)
         if user is not None:
             if user.is_active:
+                print 'active user'
                 login(request, user)
                 return HttpResponseRedirect('/marquee/')
             else:
-                return render_to_response('login.html', \
-                       {'errors': ['your account has been disabled']})
+                print 'disabled'
+                resp_dict['errors'] = ['your account has been disabled']
+                return render_to_response('login.html', resp_dict)
         else:
-            return render_to_response('login.html', \
-                   {'errors': ['invalid login attempt']})
+            print 'invalid login attempt'
+            resp_dict['errors'] = ['invalid login attempt']
+            return render_to_response('login.html', resp_dict)
     else:
-        return render_to_response('login.html')
+        print 'GET'
+        resp_dict['form'] = LoginForm()
+        return render_to_response('login.html', resp_dict)
 
-def custom_logout(request):
+def logout_handler(request):
     logout(request)
     return HttpResponseRedirect('/')
 
 @login_required
 def display(request):
-    resp_dict = {}
     if request.method == 'POST':
         return display_post(request)
     else:
         return display_get(request)
 
 def display_get(request, resp_dict=None):
-    resp_dict = resp_dict or {}
+    resp_dict = resp_dict or {'user': request.user}
     resp_dict['form'] = MarqueeForm()
+    print resp_dict
     return render_to_response("uploadText.html", resp_dict)
 
 def display_post(request):
-    resp_dict = {}
+    resp_dict = {'user': request.user}
     form = MarqueeForm(request.POST)
     form.user = request.user
     if form.is_valid():

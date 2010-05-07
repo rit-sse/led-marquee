@@ -36,6 +36,7 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/home/geowa4/Development/sse/led_marquee/sse_marquee/media/'
+STATIC_DOC_ROOT = MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -57,9 +58,22 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.load_template_source',
 )
 
+AD_DNS_NAME = 'rit.edu'
+AD_LDAP_PORT = 389
+
+AD_SEARCH_DN = 'CN=Users,dc=example,dc=com'
+
+# This is the NT4/Samba domain name
+AD_NT4_DOMAIN = 'EXAMPLE'
+
+AD_SEARCH_FIELDS = ['mail','givenName','sn','sAMAccountName']
+
+AD_LDAP_URL = 'ldap://%s:%s' % (AD_DNS_NAME,AD_LDAP_PORT)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'sse_marquee.auth.AuthenticationBackend',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 

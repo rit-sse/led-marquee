@@ -1,11 +1,22 @@
-<HTML><BODY>
-
-<form method='POST' action='./'>
-Text to send: <input type='text' name='textTo'/><br>
-
-<br>
-<input type=submit value=Press> to post text to the led board!
-</form>
-
-</BODY>
-</HTML>
+<html>
+	<head>
+		<title>SSE Marquee</title>
+	</head>
+	<body>
+		<div id="information"></div>
+		<div id="alert"></div>
+		<form id="marquee_form" method="POST" action="./">
+			<table>
+				<tr>
+					<td>
+						<label for="textTo">Text to send:</label>
+					</td>
+					<td>
+						<input id="textTo" type="text" name="textTo"/>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="Submit"/>
+		</form>
+	</body>
+</html>

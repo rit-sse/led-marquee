@@ -5,9 +5,30 @@ from telnetwatcher import TelnetWatcher
 from marqueewriter import MarqueeWriter
 from webserver import WebServer, marquee
 from BaseHTTPServer import HTTPServer
+from threading import Thread
 
 GmailUsername = "ssemarquee"
 GmailPassword = "9e5awrES"
+
+class WebThread(Thread):
+
+        def __init__(self):
+                Thread.__init__(self)
+                self.server = HTTPServer(('', 80), WebServer)
+                print("> Initializing WebThread")
+
+        def run(self):
+                try:
+                        print("> Listening for Web messages")
+                        self.server.serve_forever()
+                except KeyboardInterrupt:
+                        print("> ^C received, shutting down server")
+                        self.server.socket.close()
+
+        def OMGINEEDTODIE(self):
+                self.server.shutdown()
+                
+                    
 
 if __name__ == '__main__':
         
@@ -26,13 +47,9 @@ if __name__ == '__main__':
 
 	marquee.start()
 
-	try:
-                server = HTTPServer(('', 80), WebServer)
-                print("> Listening for Web messages")
-                server.serve_forever()
-        except KeyboardInterrupt:
-                print("> ^C received, shutting down server")
-                server.socket.close()
+	server = WebThread()
+	server.start()
+        
 
         ####
         # Right now the web server blocks.  Look into making it a thread.
@@ -45,12 +62,16 @@ if __name__ == '__main__':
 
 	
 
-	#input = ''
-	#while not input == 'q':
-	#	input = raw_input('Enter a message: ')
+	input = ''
+	while not input == 'q':
+		input = raw_input('Enter a message: ')
+		if input == 'q':
+			server.OMGINEEDTODIE()
+		else:
+			marquee.queueMessage(input.upper())
+                        
 
-	#	if input != 'q':
-	#		marquee.queueMessage(input.upper())
+	server.join()
 	
 	imap.kill()
 	imap.imap.CLOSE()

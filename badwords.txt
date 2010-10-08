@@ -27,12 +27,14 @@ Vagina : Rabbit Hole
 Sex : Gender
 CSC : That Other Group
 Your Mom : a nice, old lady
-Rape : sing musical
+Rape : sing a musical
 Rapist : musician
+Raped : sang a musical
+bukkake : bubble bath
 
 #Other things to block
 
-[9SDBE83]*[\:=\-+#\[\]]+([PDB>]|[\|]{0,1}(\)|D))[~\-]*|[~\-]*[<C][\|]*[\:=\-+#\[\]]+[CDBES96]* : :) : regex
+[Q9SDBE83]*[\(\)\*\:=\-+#\[\]]+([PDB>]|[\|]{0,1}(\)|D))[~\-]*|[~\-]*[<C][\|]*[\)\(\*\:=\-+#\[\]]+[QCDBES96]* : :D : regex
 \(\.\)\(\.\) : :) : regex
 \(\.Y\.\) : :) : regex
 

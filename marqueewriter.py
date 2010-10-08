@@ -36,34 +36,40 @@ class MarqueeWriter(threading.Thread):
 	def processMessages(self):
 		# print any queued messages
 		while len(self.messageQueue) > 0:
-			# enable scroll mode for messages
-			if not self.scrollMode:
-				self.scrollMode = True
-				self.serial.write('b')
 
 			# pop the message off the queue
 			self.queueLock.acquire()
 			message = self.messageQueue.pop(0)
 			self.queueLock.release()
 
-			
+			message = message.strip()
 
-			# if the data is invalid, move to the next message
-			if message == None:
-				continue
+                        # If message is only spaces or invalid, continue
+			if message == '' or message == None:
+                                continue
 
 			# if message is spam -- i.e. HUGE, ignore it
-			if ( len(message) > 140 ):
+			if ( len(message) > 75 ):
                                 print 'message too long'
                                 continue
+
+                        
+			# enable scroll mode for messages
+			if not self.scrollMode:
+				self.scrollMode = True
+				self.serial.write('b')
+
+			
+
+
 
 			message = self.prof.replaceProfanity(message).upper()
 			
 			length = 0
-			if ( len(message) < 140 ):
+			if ( len(message) < 75 ):
                                 length = len(message)
                         else:
-                                length = 140
+                                length = 75
                                 
 			message = message[0:length]
 

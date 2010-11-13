@@ -40,10 +40,11 @@ __license__ = "MIT/X11"
 __version__ = "1.0.1"
 
 
-import threading, imaplib2, os, sys, getpass
+import threading, imaplib2, os, sys, getpass, string
 
 DEBUG = False
 ServerTimeout = 29 # Mins  (leave if you're not sure)
+
 
 """
 The worker class for the thread. Letting a thread wait for the server to send something allows the
@@ -68,12 +69,13 @@ class ImapWatcher(threading.Thread):
 	"""
 	Initialise (sorry, I'm from the UK) everything to get ready for PUSHed mail.
 	"""
-	def __init__(self, marquee, GMailUsername, GMailPassword):
+	def __init__(self, marquee, GMailUsername, GMailPassword, ignoreText=""):
 		
 		debugMsg('DEBUG is ENABLED')
 		debugMsg('__init__() entered')
 
 		self.marquee = marquee
+		self.ignoreText = ignoreText
 				
 		try:
 			#establish connection to IMAP Server
@@ -116,8 +118,9 @@ class ImapWatcher(threading.Thread):
 	
 	def notify(self, message):
 		debugMsg('notify() entered')
-		
+		message = string.replace(message,self.ignoreText,"")
 		print '> New mail message recieved: ', message
+		
 		if len(message) > 2:
 			self.marquee.queueMessage(message[0:(len(message) - 2)].upper())
 		

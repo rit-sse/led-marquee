@@ -9,7 +9,10 @@ from threading import Thread
 
 GmailUsername = "ssemarquee"
 GmailPassword = "9e5awrES"
-
+GoogleTextBlock = "--\n" + \
+				  "Sent using SMS-to-email.  Reply to this email to text the sender back and save on SMS fees.\n" + \
+				  "https://www.google.com/voice"
+				  
 class WebThread(Thread):
 
         def __init__(self):
@@ -35,7 +38,7 @@ if __name__ == '__main__':
 	print 'SSE Marquee Interface'
 	print '-----------------------'
 	
-	imap = ImapWatcher(marquee, GmailUsername, GmailPassword)
+	imap = ImapWatcher(marquee, GmailUsername, GmailPassword, GoogleTextBlock)
 	imap.start()
 
 	print '> Listening for email...'

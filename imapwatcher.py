@@ -79,7 +79,7 @@ class ImapWatcher(threading.Thread):
 			#establish connection to IMAP Server
 			self.imap.LOGIN(GMailUsername, GMailPassword)
 
-			self.imap.SELECT("SMS Messages")
+			self.imap.SELECT()
 			
 			#get the IDs of all messages in the inbox and put in knowAboutMail
 			typ, data = self.imap.SEARCH(None, 'ALL')

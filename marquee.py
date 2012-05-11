@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from imapwatcher import ImapWatcher
+#from imapwatcher import ImapWatcher
 from telnetwatcher import TelnetWatcher
 from marqueewriter import MarqueeWriter
 from webserver import WebServer, marquee
@@ -35,8 +35,8 @@ if __name__ == '__main__':
 	print 'SSE Marquee Interface'
 	print '-----------------------'
 	
-	imap = ImapWatcher(marquee, GmailUsername, GmailPassword)
-	imap.start()
+	#imap = ImapWatcher(marquee, GmailUsername, GmailPassword) This was causing it not to run...
+	#imap.start()
 
 	print '> Listening for email...'
 
@@ -55,10 +55,10 @@ if __name__ == '__main__':
         # Right now the web server blocks.  Look into making it a thread.
         ####
 
-        #print ''
-        #print 'Enter a message to send to the marquee'
-        #print 'or type \'q\' to quit'
-        #print ''
+        print ''
+        print 'Enter a message to send to the marquee'
+        print 'or type \'q\' to quit'
+        print ''
 
 	
 
@@ -69,13 +69,14 @@ if __name__ == '__main__':
 			server.OMGINEEDTODIE()
 		else:
 			marquee.queueMessage(input.upper())
-                        
+			
+            
 
 	server.join()
 	
-	imap.kill()
-	imap.imap.CLOSE()
-	imap.imap.LOGOUT()
+	#imap.kill()
+	#imap.imap.CLOSE()
+	#imap.imap.LOGOUT()
 	telnet.kill()
 
 	marquee.kill()

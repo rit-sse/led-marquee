@@ -81,7 +81,7 @@ class ImapWatcher(threading.Thread):
 			#establish connection to IMAP Server
 			self.imap.LOGIN(GMailUsername, GMailPassword)
 
-			self.imap.SELECT("SMS Messages")
+			self.imap.SELECT()
 			
 			#get the IDs of all messages in the inbox and put in knowAboutMail
 			typ, data = self.imap.SEARCH(None, 'ALL')
@@ -244,26 +244,27 @@ class ImapWatcher(threading.Thread):
 		
 		if not self.killNow: # skips a chunk of code to sys.exit() more quickly.
 			
-			if self.IDLEArgs[0][1][0] == ('IDLE terminated (Success)'):
-			# This (above) is sent when either: there has been a timeout (server sends); or, there
-			# is new mail. We have to check manually to see if there is new mail. 
-				
-				typ, data = self.imap.SEARCH(None, 'UNSEEN') # like before, get UNSEEN message IDs
-				
-				debugMsg('Data: ')
-				debugMsg(data, 0)
-				
-				#see if each ID is new, and, if it is, make newMail True
-				for id in data[0].split():
-					if not id in self.knownAboutMail:
-						self.newMail = self.newMail or True
-					else:
-						self.timeout = True 
-						# gets executed if there are UNSEEN messages that we have been notified of, 
-						# but we haven't yet read. In this case, it response was just a timeout.
-						
-				if data[0] == '': # no IDs, so it was a timeout (but no notified but UNSEEN mail)
-					self.timeout = True
+			if self.IDLEArgs != None:
+				if self.IDLEArgs[0][1][0] == ('IDLE terminated (Success)'):
+				# This (above) is sent when either: there has been a timeout (server sends); or, there
+				# is new mail. We have to check manually to see if there is new mail. 
+					
+					typ, data = self.imap.SEARCH(None, 'UNSEEN') # like before, get UNSEEN message IDs
+					
+					debugMsg('Data: ')
+					debugMsg(data, 0)
+					
+					#see if each ID is new, and, if it is, make newMail True
+					for id in data[0].split():
+						if not id in self.knownAboutMail:
+							self.newMail = self.newMail or True
+						else:
+							self.timeout = True 
+							# gets executed if there are UNSEEN messages that we have been notified of, 
+							# but we haven't yet read. In this case, it response was just a timeout.
+							
+					if data[0] == '': # no IDs, so it was a timeout (but no notified but UNSEEN mail)
+						self.timeout = True
 		
 			#now there has either been a timeout or a new message -- Do something...
 			if self.newMail:

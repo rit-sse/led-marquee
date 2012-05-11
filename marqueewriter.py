@@ -3,6 +3,7 @@ import select
 import serial
 import time
 import threading
+import random
 from profanityfilter import *
 
 class MarqueeWriter(threading.Thread):
@@ -32,6 +33,7 @@ class MarqueeWriter(threading.Thread):
 	def run(self):
 		while not self.killNow:
 			self.processMessages()
+			time.sleep(1)
 
 	def processMessages(self):
 		# print any queued messages
@@ -48,10 +50,14 @@ class MarqueeWriter(threading.Thread):
 			if message == '' or message == None:
                                 continue
 
+			#weird email issue, split on '--' and take first bit
+			message = message.split("--")[0]
+								
 			# if message is spam -- i.e. HUGE, ignore it
-			if ( len(message) > 75 ):
-                                print 'message too long'
-                                continue
+			if  len(message) > 75:
+				print 'message too long'
+				print message
+				continue
 
                         
 			# enable scroll mode for messages
@@ -94,11 +100,14 @@ class MarqueeWriter(threading.Thread):
 			self.scrollMode = False
 			self.sendOverride = True
 			self.serial.write('a')
-			time.sleep(.5)
 
-		currTime = time.strftime("%I:%M")
+		currTime = time.strftime("%H:%M")
+		#currTime="5:02:57"
+		#if random.random() > .97:
+		#	currTime="5:02:58"
 		if self.sendOverride or not self.lastTime == currTime:
 			self.serial.write('z')            
 			self.serial.write(currTime + "\n")
 			self.lastTime = currTime
 			self.sendOverride = False
+			

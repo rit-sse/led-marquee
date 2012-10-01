@@ -10,7 +10,8 @@ from spamFilter import SpamFilter
 ## TODO: it really sucks that we need to use a global variable
 marquee = MarqueeWriter("/dev/cu.usbserial", 115200)
 
-        #"/dev/ttyUSB0"         on linux
+        #"comm3"               on windows try using http://plugable.com/drivers/prolific/ (not tested yet)
+        #"/dev/cu.usbserial"    on mac w/ http://plugable.com/drivers/prolific/
 
 
 spam = SpamFilter(3,4)

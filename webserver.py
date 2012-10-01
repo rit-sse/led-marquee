@@ -8,7 +8,7 @@ from marqueewriter import MarqueeWriter
 from spamFilter import SpamFilter
 
 ## TODO: it really sucks that we need to use a global variable
-marquee = MarqueeWriter("COM3", 115200)
+marquee = MarqueeWriter("/dev/cu.usbserial", 115200)
 
         #"/dev/ttyUSB0"         on linux
 

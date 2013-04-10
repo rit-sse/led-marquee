@@ -43,8 +43,8 @@ def get():
 	else:
 		print("No mail.")
 
-def isFiltered():                                                               
-	"""                                                                         
-	Returns True if it must be filtered, False otherwise.                       
-	"""                                                                         
+def isFiltered():
+	"""
+	Returns True if it must be filtered, False otherwise.
+	"""
 	return True

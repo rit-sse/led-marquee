@@ -25,7 +25,6 @@ def ledMarquee():
 	t.start()
 
 	while(True):
-		
 		s = q.get()
 		print(s)
 

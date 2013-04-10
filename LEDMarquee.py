@@ -8,7 +8,7 @@ def cyclePrint():
 	while(True):
 		for i in printList:
 			printStr = i.get()
-			if (printStr != ""):
+			if (printStr):
 				time.sleep(2)
 				print(printStr)
 

@@ -1,9 +1,10 @@
-import InputClock
-import InputConsole
+from inputs import InputClock
+from inputs import InputConsole
+from inputs import InputWeather
 import time
 
 def cyclePrint():
-	printList = [InputConsole, InputClock]
+	printList = [InputConsole, InputClock, InputWeather]
 	while(True):
 		for i in printList:
 			printStr = i.get()

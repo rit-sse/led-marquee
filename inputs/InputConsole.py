@@ -20,3 +20,9 @@ def get():
 				lastLine = line.strip()
 		return lastLine
 	return ""
+
+def isFiltered():                                                               
+    """                                                                         
+    Returns True if it must be filtered, False otherwise.                       
+    """                                                                         
+    return True

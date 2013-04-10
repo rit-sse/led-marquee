@@ -16,5 +16,9 @@ def get():
         next_event = str(event_info['short_name'])
 
     return next_event
-get()
 
+def isFiltered():                                                               
+    """                                                                         
+    Returns True if it must be filtered, False otherwise.                       
+    """                                                                         
+    return False

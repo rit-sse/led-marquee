@@ -27,3 +27,9 @@ def k_to_f(kelvin):
 	Returns Farenheit conversion from Kelvin
 	"""
 	return int((kelvin - 273.15)* 1.8000 + 32.0)
+
+def isFiltered():                                                               
+    """                                                                         
+    Returns True if it must be filtered, False otherwise.                       
+    """                                                                         
+    return False

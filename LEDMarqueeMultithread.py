@@ -1,6 +1,6 @@
 from inputs import InputClock
 from inputs import InputConsole
-from inputs import InputWeather
+#from inputs import InputWeather
 from filters import profanityfilter
 import time, threading, queue
 
@@ -13,7 +13,7 @@ def ledMarquee():
 	"""
 
 	# Which files to get input from
-	printList = [InputConsole, InputClock, InputWeather]
+	printList = [InputConsole, InputClock]
 
 	# Minimum time, in seconds, between updates
 	timeOut = 2
@@ -36,6 +36,8 @@ def updateThread(q, inList, timeOut):
 	prevStrDict = {}
 	for i in inList:
 		prevStrDict[i] = i.get()
+		if (prevStrDict[i]):
+			q.put(prevStrDict[i])
 
 	# Iterates through all given commands.
 	while (True):

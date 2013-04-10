@@ -1,2 +1,4 @@
+An implementation of an LED marquee in python. It can handle multiple inputs such as weather, files, and clock, and switch between the inputs when necessary.
+
 Usage:
   python3 LEDMarquee.py

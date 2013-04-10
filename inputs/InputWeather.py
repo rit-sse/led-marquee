@@ -15,15 +15,20 @@ def get():
 
 	if weather_info is not None:
 		temp = str(k_to_f(weather_info['main']['temp']))
-		state = str(weather_info['weather'][0]['main'])
+		#state = str(weather_info['weather'][0]['main'])
 		desc = str(weather_info['weather'][0]['description'])
-		weather_string = temp + " degrees, " + state + " (" + desc + ")"
+		weather_string = temp + " degrees, " + desc
 	
 	return weather_string
-
 
 def k_to_f(kelvin):
 	"""
 	Returns Farenheit conversion from Kelvin
 	"""
 	return int((kelvin - 273.15)* 1.8000 + 32.0)
+
+def isFiltered():                                                               
+    """                                                                         
+    Returns True if it must be filtered, False otherwise.                       
+    """                                                                         
+    return False

@@ -22,7 +22,9 @@ def ledMarquee():
       printStr = i.get()
       if (printStr):
         time.sleep(2)
-        print(pro.replaceProfanity(printStr))
+        if (i.isFiltered()):
+          printStr = pro.replaceProfanity(printStr)
+        print(printStr)
 
 
 ledMarquee()

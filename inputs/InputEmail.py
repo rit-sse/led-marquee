@@ -42,3 +42,9 @@ def get():
 		#print(raw_email)
 	else:
 		print("No mail.")
+
+def isFiltered():                                                               
+	"""                                                                         
+	Returns True if it must be filtered, False otherwise.                       
+	"""                                                                         
+	return True

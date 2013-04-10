@@ -2,10 +2,10 @@ import urllib.request
 import json
 
 def get():
-    """
-    Returns properly formatted weather for Rochester, NY
-    City can be changed by grabbing the proper openweathermap.org url.
-    """
+	"""
+	Returns properly formatted weather for Rochester, NY
+	City can be changed by grabbing the proper openweathermap.org url.
+	"""
 	weather_string = "Weather Unavailable"
 
 	weather_url = "http://api.openweathermap.org/data/2.1/weather/city/5134086"
@@ -24,6 +24,6 @@ def get():
 
 def k_to_f(kelvin):
 	"""
-    Returns Farenheit conversion from Kelvin
-    """
-    return int((kelvin - 273.15)* 1.8000 + 32.0)
+	Returns Farenheit conversion from Kelvin
+	"""
+	return int((kelvin - 273.15)* 1.8000 + 32.0)

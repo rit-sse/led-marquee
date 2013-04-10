@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>SSE Marquee</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	</head>
+	<body>
+		{% if user.is_authenticated %}
+		<div id="user_info">
+			{{ user.username }}
+			<a href="{% url sse_marquee.marquee.views.logout_handler %}">logout</a>
+		</div>
+		{% endif %}
+		<div id="information">{{ information }}</div>
+		<ul id="error">
+		{% for e in errors %}
+			<li>{{ e }}</li>
+		{% endfor %}
+		</ul>
+		{% block body %}
+		{% endblock %}
+	</body>
+</html>

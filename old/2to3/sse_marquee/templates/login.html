@@ -1,0 +1,17 @@
+{% extends "marquee_common.html" %}
+
+{% block body %}
+
+<form method="POST" action="{% url sse_marquee.marquee.views.login_handler %}">
+	<input type="hidden" name="next" value="{% url sse_marquee.marquee.views.display %}"/>
+	<table>
+		{{ form.as_table }}
+	</table>
+	<input type="submit" value="Log in"/>
+</form>
+<script>
+	$(function() {
+			$("#id_username").focus();
+	});
+</script>
+{% endblock %}

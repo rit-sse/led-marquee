@@ -1,6 +1,7 @@
 from inputs import InputClock
 from inputs import InputConsole
 from inputs import InputWeather
+from filters import profanityfilter
 import time, threading, queue
 
 def ledMarquee():
@@ -20,13 +21,15 @@ def ledMarquee():
 	# Display queue
 	q = queue.Queue()
 
+	pro = profanityfilter.ProfanityFilter()
+
 	t = threading.Thread(target=updateThread, args=(q, printList, timeOut))
 	t.daemon = True
 	t.start()
 
 	while(True):
 		s = q.get()
-		print(s)
+		print(pro.replaceProfanity(s))
 
 
 def updateThread(q, inList, timeOut):

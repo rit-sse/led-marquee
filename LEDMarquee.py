@@ -2,6 +2,7 @@ from inputs import InputClock
 from inputs import InputConsole
 from inputs import InputWeather
 from inputs import InputMomentum
+from inputs import InputEmail
 from filters import profanityfilter
 import time
 
@@ -12,7 +13,7 @@ def ledMarquee():
 
   Current state: Printing as simulation.
   """
-  printList = [InputConsole, InputClock, InputWeather, InputMomentum]
+  printList = [InputConsole, InputClock, InputWeather, InputMomentum, InputEmail]
 
   pro = profanityfilter.ProfanityFilter()
 

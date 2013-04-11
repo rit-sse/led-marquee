@@ -1,11 +1,16 @@
-import imaplib, email
+import imaplib, email, configparser
 
 
 def get():
 
+	config = configparser.ConfigParser()
+	config.read('config.ini')
+
 	# See the Google Drive for account and password.
-	GMAILUSER = "XXX@gmail.com"
-	GMAILPWD  = "XXX"
+	GMAILUSER = config['EMAIL']['username']
+	GMAILPWD  = config['EMAIL']['password']
+
+	print(GMAILUSER + ":" + GMAILPWD)
 
 	mail = imaplib.IMAP4_SSL('imap.gmail.com')
 	mail.login(GMAILUSER, GMAILPWD)

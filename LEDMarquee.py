@@ -23,7 +23,6 @@ def ledMarquee():
 
 	while(True):
 		#Iterates through all given commands, printing .get() statements.
-		testSend("this")
 		for i in printList:
 			printStr = i.get()
 			if (printStr):

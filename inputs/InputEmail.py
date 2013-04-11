@@ -54,6 +54,3 @@ def isFiltered():
 	Returns True if it must be filtered, False otherwise.
 	"""
 	return True
-
-
-print(get())

@@ -10,7 +10,7 @@ def get():
 	GMAILUSER = config['EMAIL']['username']
 	GMAILPWD  = config['EMAIL']['password']
 
-	print(GMAILUSER + ":" + GMAILPWD)
+	#print(GMAILUSER + ":" + GMAILPWD)
 
 	mail = imaplib.IMAP4_SSL('imap.gmail.com')
 	mail.login(GMAILUSER, GMAILPWD)
@@ -39,8 +39,9 @@ def get():
 
 		smsBeginIndex = msgStr.find("format=flowed; delsp=yes")
 		if (smsBeginIndex != -1):
-
-			print(msgStr[(smsBeginIndex + 24) :])
+			msgContent = msgStr[(smsBeginIndex + 25) :].strip().splitlines()
+			return (" ".join(msgContent).replace("-- Sent using SMS-to-email. Reply to this email to text the sender back and   save on SMS fees. https://www.google.com/voice/", ""))
+			#print(msgContentStr)
 
 
 
@@ -53,3 +54,6 @@ def isFiltered():
 	Returns True if it must be filtered, False otherwise.
 	"""
 	return True
+
+
+print(get())

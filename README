@@ -1,4 +1,17 @@
 An implementation of an LED marquee in python. It can handle multiple inputs such as weather, files, and clock, and switch between the inputs when necessary.
 
 Usage:
+
+You must create a file named "config.ini" that contains the following:
+
+// Start copy //
+[EMAIL]
+username=XXX@gmail.com
+password=XXX
+// End copy  //
+
+Replace the "XXX"s with your username and password.
+
+
+Then, run:
   python3 LEDMarquee.py

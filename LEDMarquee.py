@@ -46,5 +46,5 @@ def sendArd(sendStr):
 		bus.transaction(
 		i2c.writing(address, bytes(byteList)))
 
-send("test")
+sendArd("test")
 ledMarquee()

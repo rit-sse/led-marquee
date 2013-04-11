@@ -13,7 +13,7 @@ def get():
     request.close
 
     if event_info is not None:
-        next_event = str(event_info['short_name'])
+        next_event = "Next Event: " + str(event_info['short_name'])
 
     return next_event
 

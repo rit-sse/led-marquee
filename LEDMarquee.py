@@ -49,7 +49,6 @@ def ledMarquee():
 
 def sendArd(sendStr):
 	address = 0x04
-	print("test")
 	byteList = []
 	for i in sendStr:
 		byteList.append(ord(i))
@@ -59,5 +58,6 @@ def sendArd(sendStr):
 		bus.transaction(
 		i2c.writing(address, bytes(byteList)))
 
-sendArd("test")
+
+
 ledMarquee()

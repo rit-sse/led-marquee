@@ -1,5 +1,5 @@
 import quick2wire.i2c as i2c
-
+import configparser
 from inputs import InputClock
 from inputs import InputConsole
 from inputs import InputWeather
@@ -8,6 +8,16 @@ from inputs import InputEmail
 from filters import profanityfilter
 import time
 
+def isFamilyFriendly():
+	config = configparser.ConfigParser()                                        
+	config.read('config.ini')                                                  
+
+	FAMILY_FRIENDLY = config['FILTERS']['FamilyFriendlyMode']
+
+	if(FAMILY_FRIENDLY == 'YES'):
+		return True
+	else:
+		return False
 
 
 def ledMarquee():
@@ -18,7 +28,7 @@ def ledMarquee():
 	Current state: Printing as simulation.
 	"""
 	printList = [InputConsole, InputClock, InputWeather, InputMomentum, InputEmail]
-
+	FamilyFriendly = isFamilyFriendly()
 	pro = profanityfilter.ProfanityFilter()
 
 	while(True):
@@ -28,7 +38,11 @@ def ledMarquee():
 			if (printStr):
 				time.sleep(2)
 				if (i.isFiltered()):
-					printStr = pro.replaceProfanity(printStr)
+					if(isFamilyFriendly()):
+						if(printStr != pro.replaceProfanity(printStr)):
+							printStr = "[Message Redacted]"
+					else:
+						printStr = pro.replaceProfanity(printStr)
 				sendArd(printStr)
 				print(printStr)
 

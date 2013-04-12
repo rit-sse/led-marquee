@@ -17,4 +17,4 @@ Replace the "XXX"s with your username and password.
 
 
 Then, run:
-  python3 LEDMarquee.py
+	sh ./run.sh

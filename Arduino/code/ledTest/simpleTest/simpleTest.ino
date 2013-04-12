@@ -31,7 +31,7 @@ void loop() {
   for (int row = 0; row < 7; row++){
     for (int col = 0; col < 35; col++){
       setLed(row, col);
-      delay(30);
+      delay(300);
     }
   }
 }

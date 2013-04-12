@@ -8,6 +8,9 @@ You must create a file named "config.ini" that contains the following:
 [EMAIL]
 username=XXX@gmail.com
 password=XXX
+
+[FILTERS]
+FamilyFriendlyMode = (YES/NO)
 // End copy  //
 
 Replace the "XXX"s with your username and password.

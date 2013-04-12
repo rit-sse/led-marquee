@@ -31,10 +31,10 @@
 const int numRows = 7;
 const int numCols = 5;
 
-int pins[(numRows + numCols)] = {8, 9, 10, 11, 22, 23, 24, 25, 26};
+int pins[(numRows + numCols)] = {9, 8, 7, 6, 5, 4, 3, 22};
 
-int rows[numRows] = {pins[0], pins[1], pins[2], pins[3]};
-int cols[numCols] = {pins[4], pins[5]};
+int rows[numRows] = {pins[0], pins[1], pins[2], pins[3], pins[4], pins[5], pins[6]};
+int cols[numCols] = {pins[4]};
 
 byte leds[numRows][numCols];
 

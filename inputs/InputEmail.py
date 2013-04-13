@@ -47,7 +47,8 @@ def get():
 			msgContent = msgStr[(smsBeginIndex + 25) :].strip().splitlines()
 			return (" ".join(msgContent).replace("-- Sent using SMS-to-email."
 					" Reply to this email to text the sender back and"
-					"   save on SMS fees. https://www.google.com/voice/", ""))		else:
+					"   save on SMS fees. https://www.google.com/voice/", ""))
+	else:
 		print("No mail.")
 
 def isFiltered():

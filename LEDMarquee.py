@@ -1,4 +1,3 @@
-import quick2wire.i2c as i2c
 import configparser
 from inputs import InputClock
 from inputs import InputConsole
@@ -7,6 +6,17 @@ from inputs import InputMomentum
 from inputs import InputEmail
 from filters import profanityfilter
 import time
+
+# This is a test to make sure it's running on our RPi.
+# It simply tests if the processor is "armv61," which it is on our RPi,
+# but probably not on any of our computers.
+onRPi = False
+import platform
+if (platform.machine() == 'armv61'):
+	import quick2wire.i2c as i2c
+	onRPi = True
+
+
 
 def isFamilyFriendly():
 	config = configparser.ConfigParser()                                        
@@ -48,15 +58,17 @@ def ledMarquee():
 
 
 def sendArd(sendStr):
-	address = 0x04
-	byteList = []
-	for i in sendStr:
-		byteList.append(ord(i))
-	byteList.append(0x0A)
+	global onRPi
+	if (onRPi):
+		address = 0x04
+		byteList = []
+		for i in sendStr:
+			byteList.append(ord(i))
+		byteList.append(0x0A)
 
-	with i2c.I2CMaster() as bus:    
-		bus.transaction(
-		i2c.writing(address, bytes(byteList)))
+		with i2c.I2CMaster() as bus:    
+			bus.transaction(
+			i2c.writing(address, bytes(byteList)))
 
 
 

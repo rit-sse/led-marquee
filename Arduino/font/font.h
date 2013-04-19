@@ -1,6 +1,4 @@
-
-<!-- saved from url=(0040)http://heim.ifi.uio.no/haakoh/avr/font.h -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><style type="text/css"></style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">const int font_count = 46;
+const int font_count = 46;
 const unsigned char font[46][5] = {
   {0x3f, 0x48, 0x48, 0x48, 0x3f},
   {0x7f, 0x49, 0x49, 0x49, 0x36},
@@ -48,4 +46,3 @@ const unsigned char font[46][5] = {
   {0x40, 0x40, 0x40, 0x40, 0x7f},
   {0x7f, 0x49, 0x49, 0x49, 0x7f},
   {0x79, 0x49, 0x49, 0x49, 0x7f}};
-</pre></body></html>

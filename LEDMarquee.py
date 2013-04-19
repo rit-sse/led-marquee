@@ -8,13 +8,16 @@ from filters import profanityfilter
 import time
 
 # This is a test to make sure it's running on our RPi.
-# It simply tests if the processor is "armv61," which it is on our RPi,
-# but probably not on any of our computers.
-onRPi = False
-import platform
-if (platform.machine() == 'armv61'):
+# It simply tests if we can import quick2wire (our i2c library).
+# This *should* fail on all of our computers.
+onRPi = True
+import sys
+try:
 	import quick2wire.i2c as i2c
-	onRPi = True
+except ImportError:
+	print("Error: quick2wire (i2c) failed to import.", file=sys.stderr)
+	print("You're probably not running this on the Raspberry Pi.", file=sys.stderr)
+	onRPi = False
 
 
 

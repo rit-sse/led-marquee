@@ -6,14 +6,18 @@ def get():
 	Returns the properly formatted String grabbed from Email to display
 	as SMS output to reader.
 	"""
-	config = configparser.ConfigParser()
-	config.read('config.ini')
 
-	# See the Google Drive for account and password.
-	GMAILUSER = config['EMAIL']['username']
-	GMAILPWD  = config['EMAIL']['password']
+	try:
+		config = configparser.ConfigParser()
+		config.read('config.ini')
 
-	#print(GMAILUSER + ":" + GMAILPWD)
+		# See the Google Drive for account and password.
+		GMAILUSER = config['EMAIL']['username']
+		GMAILPWD  = config['EMAIL']['password']
+	except:
+		print('ERROR: Config error. Does "config.ini" exist in this directory?')
+		print("Exiting...")
+		exit()
 
 	mail = imaplib.IMAP4_SSL('imap.gmail.com')
 	mail.login(GMAILUSER, GMAILPWD)

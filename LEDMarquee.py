@@ -11,21 +11,27 @@ import time
 # It simply tests if we can import quick2wire (our i2c library).
 # This *should* fail on all of our computers.
 onRPi = True
-import sys
 try:
 	import quick2wire.i2c as i2c
 except ImportError:
-	print("Error: quick2wire (i2c) failed to import.", file=sys.stderr)
-	print("You're probably not running this on the Raspberry Pi.", file=sys.stderr)
+	print("ERROR: quick2wire (i2c) failed to import.")
+	print("You're probably not running this on the Raspberry Pi.")
+	print("Ignoring...")
+	print("")
 	onRPi = False
 
 
 
 def isFamilyFriendly():
-	config = configparser.ConfigParser()                                        
-	config.read('config.ini')                                                  
+	try:
+		config = configparser.ConfigParser()                                        
+		config.read('config.ini')                                                  
 
-	FAMILY_FRIENDLY = config['FILTERS']['FamilyFriendlyMode']
+		FAMILY_FRIENDLY = config['FILTERS']['FamilyFriendlyMode']
+	except:
+		print('ERROR: Config error. Does "config.ini" exist in this directory?')
+		print("Exiting...")
+		exit()
 
 	if(FAMILY_FRIENDLY == 'YES'):
 		return True
@@ -51,11 +57,12 @@ def ledMarquee():
 			if (printStr):
 				time.sleep(2)
 				if (i.isFiltered()):
+					cleanStr = pro.replaceProfanity(printStr)
 					if(isFamilyFriendly()):
-						if(printStr != pro.replaceProfanity(printStr)):
+						if(printStr != cleanStr):
 							printStr = "[Message Redacted]"
 					else:
-						printStr = pro.replaceProfanity(printStr)
+						printStr = cleanStr
 				sendArd(printStr)
 				print(printStr)
 

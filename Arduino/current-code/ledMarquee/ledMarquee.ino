@@ -1,3 +1,14 @@
+/**
+* ledMarquee.ino
+* 
+* Arduino side of the SSE LED Marquee.
+* Receives a char[] over i2c from the Raspberry Pi, 
+* handles the char[], prints it out to the LEDs, scrolling.
+* 
+*/
+
+
+
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>

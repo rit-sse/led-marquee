@@ -1,6 +1,6 @@
 import urllib.request
 import json
-
+from datetime import datetime
 def get():
     """
     Returns properly formatted string for the next event
@@ -12,11 +12,15 @@ def get():
     event_info = json.loads(request.read().decode("utf-8"))
     request.close
 
-    if event_info is not None:
-        next_event = "Next Event: " + str(event_info['short_name'])
-
-    return next_event
-
+    time = (str(event_info['end_date'])[11:-6])                                 
+    date = (str(event_info['end_date'])[0:10])                                  
+    checkAgainstTime = datetime.now().strftime('%H:%M:%S')                      
+    checkAgainstDate = datetime.now().strftime('%Y-%m-%d')                      
+    if event_info is not None and date <= checkAgainstDate and time > checkAgainstTime:
+        next_event = "Next Event: " + str(event_info['short_name'] + "\n") 
+    else:                                                                       
+        next_event = "" 
+    return next_event  
 def isFiltered():                                                               
     """                                                                         
     Returns True if it must be filtered, False otherwise.                       

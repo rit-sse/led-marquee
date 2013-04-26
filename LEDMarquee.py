@@ -63,9 +63,9 @@ def ledMarquee():
 							printStr = "[Message Redacted]"
 					else:
 						printStr = cleanStr
-				sendArd(printStr)
-				print(printStr)
-
+				if(printStr != ""):
+					sendArd(printStr)
+					print(printStr)
 
 def sendArd(sendStr):
 	global onRPi

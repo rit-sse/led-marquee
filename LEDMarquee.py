@@ -20,6 +20,8 @@ except ImportError:
 	print("")
 	onRPi = False
 
+# Uncomment the next line to keep the RPi from sending over i2c.
+# onRPi = False
 
 
 def isFamilyFriendly():
@@ -53,7 +55,7 @@ def ledMarquee():
 	while(True):
 		#Iterates through all given commands, printing .get() statements.
 		for i in printList:
-			printStr = i.get()
+			printStr = i.get().strip()
 			if (printStr):
 				time.sleep(2)
 				if (i.isFiltered()):

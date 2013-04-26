@@ -17,7 +17,7 @@ def get():
     checkAgainstTime = datetime.now().strftime('%H:%M:%S')                      
     checkAgainstDate = datetime.now().strftime('%Y-%m-%d')                      
     if event_info is not None and date <= checkAgainstDate and time > checkAgainstTime:
-        next_event = "Next Event: " + str(event_info['short_name'] + "\n") 
+        next_event = "Next Event: " + str(event_info['short_name']) 
     else:                                                                       
         next_event = "" 
     return next_event  

@@ -60,7 +60,7 @@ def ledMarquee():
 				time.sleep(2)
 				if (i.isFiltered()):
 					cleanStr = pro.replaceProfanity(printStr)
-					if(familyFriendly:
+					if(familyFriendly):
 						if(printStr != cleanStr):
 							printStr = "[Message Redacted]"
 					else:

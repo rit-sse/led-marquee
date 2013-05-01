@@ -35,7 +35,7 @@ def isFamilyFriendly():
 		print("Exiting...")
 		exit()
 
-	if(FAMILY_FRIENDLY == 'YES'):
+	if(FAMILY_FRIENDLY == "YES"):
 		return True
 	else:
 		return False
@@ -49,7 +49,7 @@ def ledMarquee():
 	Current state: Printing as simulation.
 	"""
 	printList = [InputConsole, InputClock, InputWeather, InputMomentum, InputEmail]
-	FamilyFriendly = isFamilyFriendly()
+	familyFriendly = isFamilyFriendly()
 	pro = profanityfilter.ProfanityFilter()
 
 	while(True):
@@ -60,7 +60,7 @@ def ledMarquee():
 				time.sleep(2)
 				if (i.isFiltered()):
 					cleanStr = pro.replaceProfanity(printStr)
-					if(isFamilyFriendly()):
+					if(familyFriendly:
 						if(printStr != cleanStr):
 							printStr = "[Message Redacted]"
 					else:
@@ -72,16 +72,18 @@ def ledMarquee():
 def sendArd(sendStr):
 	global onRPi
 	if (onRPi):
-		address = 0x04
-		byteList = []
-		for i in sendStr:
-			byteList.append(ord(i))
-		byteList.append(0x0A)
+		try:
+			address = 0x04
+			byteList = []
+			for i in sendStr:
+				byteList.append(ord(i))
+			byteList.append(0x0A)
 
-		with i2c.I2CMaster() as bus:    
-			bus.transaction(
-			i2c.writing(address, bytes(byteList)))
-
+			with i2c.I2CMaster() as bus:    
+				bus.transaction(
+				i2c.writing(address, bytes(byteList)))
+		except:
+			print("i2c Error: Couldn't send...")
 
 
 ledMarquee()

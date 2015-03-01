@@ -2,7 +2,7 @@ An implementation of an LED marquee in python. It can handle multiple inputs suc
 
 ##Usage:
 
-You must create a file named "config.ini" that contains the following:
+You must create a file named `config.ini` that contains the following:
 ```
 [EMAIL]
 username=XXX@gmail.com

@@ -1,20 +1,21 @@
 An implementation of an LED marquee in python. It can handle multiple inputs such as weather, files, and clock, and switch between the inputs when necessary.
 
-Usage:
+##Usage:
 
-You must create a file named "config.ini" that contains the following:
-
-// Start copy //
+You must create a file named `config.ini` that contains the following:
+```
 [EMAIL]
 username=XXX@gmail.com
 password=XXX
 
 [FILTERS]
 FamilyFriendlyMode = (YES/NO)
-// End copy  //
+```
 
 Replace the "XXX"s with your username and password.
 
 
 Then, run:
-	sh ./run.sh
+```
+sh ./run.sh
+```
